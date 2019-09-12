@@ -1,5 +1,5 @@
 const { override, fixBabelImports, addLessLoader,addDecoratorsLegacy,addWebpackAlias} = require('customize-cra');
-
+const {resolve}=require('path');
 // 修改脚手架webpack的配置
 module.exports = override(
 
@@ -21,6 +21,10 @@ module.exports = override(
 
      // 配置路径别名, 就是为了简写路径. （缺点：路径就没有提示）
        addWebpackAlias({
+           '@comps':resolve(__dirname,'src/components'),
+           '@conts':resolve(__dirname,'src/containers'),
+           '@config':resolve(__dirname,'src/config'),
+           '@redux':resolve(__dirname,'src/redux')
 
         })
 );
