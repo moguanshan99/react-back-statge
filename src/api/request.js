@@ -7,7 +7,7 @@ import axios from 'axios';
 import store from '@redux/store';
 import {message} from 'antd';
 
-//创建axios的实例
+//创建axios的实例,返回的是一个实例对象
 const instance=axios.create({
         //基本路径
         baseURL:'http://localhost:3000/api',
@@ -25,14 +25,14 @@ instance.interceptors.request.use(
         //config就是发送请求的配置对象信息（请求的方法，请求头，请求头参数）
 
         /*
-        * 1.这里需要发送的公共请求头参数就是authorzation，参数值就是token
+        * 1.这里需要发送的公共请求头就是authorzation，即：token
         * 2.token值的获取方式有两种
         *      ----1).从localstorage获取token，但是由于localstorage存储在本地，可近似看成是对数据库进行的操作，因此效率较慢
         *      ----2).从redux中获取token，redux是内存存储，处理速度较快，故在这里利用redux来获取token
         * 3.如何获取redux中的token？
         *      ----1).利用高阶组件connect方法，但是要使用connect的必须是一个组件，这里不是组件故使用不了
         *      ----2).使用store.getState()方法来获取状态数据
-        * 4./api/login不需要请求头参数要做处理
+        * 4./api/login不需要请求头，故要做处理
         */
         const {token}=store.getState().user;
         if (token){
@@ -40,6 +40,9 @@ instance.interceptors.request.use(
         }
        return config;
 }
+    /*(err) => {
+        return Promise.reject(err);
+      }*/
     );
 
 //设置响应拦截器---处理响应之前触发的函数

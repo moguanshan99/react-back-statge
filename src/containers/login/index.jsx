@@ -3,20 +3,23 @@ import {Form,Input,Icon,Button,message} from 'antd'
 import {connect} from 'react-redux'
 import {saveUser} from "@redux/action-creators";
 import './index.less'
-import logo from './logo.png';
+import logo from '@assets/images/logo.png';
 import {resLogin} from '../../api'
+import withCheckLogin from "@conts/with-check-login";
 
 
 /*
 * 1.react-redux中有一个方法：connect()(),是一个高阶组件，通过connect方法可以将action-creators中                                         的方法作为props的属性来进行组件间数据的传递
 * 2.Login组件中不需要用户数据（状态数据），故可以不传，只引入saveUser方法就好
 */
-
+@withCheckLogin
 @connect(
     null,
     {saveUser})
 //调用一个高阶组件Form.create()()是为了创建form属性，用于自定义表单校验
+
 @Form.create()
+
  class Login extends React.Component {
 
     /**
@@ -148,7 +151,7 @@ import {resLogin} from '../../api'
                             message.success('登录成功');
 
                             //保存用户数据
-                            this.props.saveUser(result.data);
+                            this.props.saveUser(result);
 
                             //登录成功，跳转到'/'路由
                             this.props.history.replace('/');  //用于非render方法中进行路由的跳转
