@@ -3,10 +3,10 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import routes from "./config/routes";
 import NotMatch from "@comps/not-match";
 import BasicLayout from "@comps/basic-layout";
+import Login from "@conts/login";
 
 export default class App extends React.Component {
 
-comps
     render() {
         return (
             <Router>
@@ -15,6 +15,12 @@ comps
                 {/*    <Route path="/login" exact component={Login}/>*/}
                 {/*</Switch>*/}
 
+                {/*
+                   Login组件被包裹在BasicLayout组件中，最为该组件的子元素在整个负组件中显示，但Login组件应该单独显示，
+                   故应该从BasicLayout组件中提取出来
+                */}
+                <Switch>
+                <Route path='/login' exact component={Login}/>
 
                 {/*
                     1.点击路由，只切换中间部分（即除了中间内容去变化，其他都不影响）
@@ -39,6 +45,7 @@ comps
                     <Route component={NotMatch}/>
                 </Switch>
                 </BasicLayout>
+                </Switch>
             </Router>
         );
     }

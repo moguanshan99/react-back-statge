@@ -7,7 +7,7 @@ import LeftNav from "./left-nav";
 const { Header, Content, Footer, Sider } = Layout;
 
 //登录验证
-// @withCheckLogin
+@withCheckLogin
 class BasicLayout extends React.Component {
 
     /*

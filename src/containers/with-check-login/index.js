@@ -25,6 +25,7 @@ export default function withCheckLogin(WrappedComponent) {
                 // const {location,token,history,match}=this.props;
                 // const {pathname}=location;
 
+              //解决高阶组件丢失children属性问题
                 const {token,...rest}=this.props;//除了token，剩余的其他属性全部打包到rest中
                 const {location:{pathname}}=rest;
                 //登录验证
@@ -54,7 +55,7 @@ export default function withCheckLogin(WrappedComponent) {
 
 
                 //Login组件已经没有路由的三大属性了，故需要通过新组建传递过去
-                // return <WrappedComponent history={history} loaction={location} match={match}/>;
+                // return <WrappedComponent history={history} location={location} match={match}/>;
                 return <WrappedComponent {...rest}/> //解包
             }
         }
