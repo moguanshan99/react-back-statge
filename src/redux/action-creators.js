@@ -4,6 +4,7 @@
 
 import {SAVE_USER} from './action-types';
 
+//保存数据
 export const saveUser=(user)=>({
      type:SAVE_USER,data:user
 });

@@ -16,8 +16,8 @@ import withCheckLogin from "@conts/with-check-login";
 @connect(
     null,
     {saveUser})
-//调用一个高阶组件Form.create()()是为了创建form属性，用于自定义表单校验
 
+//调用一个高阶组件Form.create()()是为了创建form属性，用于自定义表单校验
 @Form.create()
 
  class Login extends React.Component {

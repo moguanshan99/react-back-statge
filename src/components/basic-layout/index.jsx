@@ -1,11 +1,13 @@
 import React from 'react';
 import { Layout, Breadcrumb, } from 'antd';
 import logo from '@assets/images/logo.png';
+import withCheckLogin from '@conts/with-check-login'
 import './index.less'
 import LeftNav from "./left-nav";
 const { Header, Content, Footer, Sider } = Layout;
 
-
+//登录验证
+// @withCheckLogin
 class BasicLayout extends React.Component {
 
     /*
@@ -19,6 +21,8 @@ class BasicLayout extends React.Component {
         isDisplay:true
     };
 
+
+    //点击'<'：collapsed发生变化，文字也发生变化（展示或隐藏）
     onCollapse = collapsed => {
 
         //更新状态数据
@@ -49,7 +53,9 @@ class BasicLayout extends React.Component {
                             <Breadcrumb.Item>User</Breadcrumb.Item>
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>Bill is a cat.</div>
+                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                            {this.props.children}
+                        </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>

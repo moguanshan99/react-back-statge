@@ -30,7 +30,7 @@ export default function withCheckLogin(WrappedComponent) {
                 //登录验证
                 /*
                 * 1.首先判断当前地址是否为'/login'
-                *     --由路由（<Route/>）加载的组件都有路由的三大属性【history，location，match】,而在location中又有一个pathname属性                       ，值为当前的地址
+                *     --由路由（<Route/>）加载的组件都有路由的三大属性【history，location，match】,而在location中又有一个pathname属性                        ，值为当前的地址
                 *     --因为返回的新的组件（即Login组件外面包裹着一个withCheckLogin组件），而新组建是被路由组件加载的，故新组件身上有路由                       的三大属性，故可以直接使用location，但是Login组件不是通过路由加载的，因此已经没有路由的三大属性了，但是可以通过                         withCheck组件传递
                 * 2.如果用户已经登陆了，跳转到'/'
                 *     --如何判断用户已经登陆了？
