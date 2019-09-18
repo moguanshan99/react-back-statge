@@ -4,6 +4,7 @@ import logo from '@assets/images/logo.png';
 import withCheckLogin from '@conts/with-check-login'
 import './index.less'
 import LeftNav from "./left-nav";
+import HeaderMain from "./header-main";
 const { Header, Content, Footer, Sider } = Layout;
 
 //登录验证
@@ -47,7 +48,9 @@ class BasicLayout extends React.Component {
                   <LeftNav/>
                 </Sider>
                 <Layout>
-                    <Header style={{ background: '#fff', padding: 0 }} />
+                    <Header style={{ background: '#fff', padding: 0 ,height:80}} >
+                           <HeaderMain/>
+                    </Header>
                     <Content style={{ margin: '0 16px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>User</Breadcrumb.Item>
