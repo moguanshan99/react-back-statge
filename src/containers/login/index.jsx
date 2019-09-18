@@ -23,7 +23,7 @@ import withCheckLogin from "@conts/with-check-login";
  class Login extends React.Component {
 
     /**
-     * 自定义表单校验
+     * 自定义表单校验(校验的规则)
      * @param rule  校验规则
      * @param value  所有表单项的值
      * @param callback 必须调用，当callback传参时，表示校验失败，并提示校验参数；当callback不传参时，表示校验成功。
@@ -87,6 +87,7 @@ import withCheckLogin from "@conts/with-check-login";
                 *    ----"proxy": "http://localhost:5000"
                 *               ---目标服务器
                 */
+
                 // axios.post('http://localhost:3000/api/login',{username,password})
                 //
                 // //返回的值是一个promise实例，故可以使用.then().catch()

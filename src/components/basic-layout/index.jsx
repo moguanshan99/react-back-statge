@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Breadcrumb, } from 'antd';
+import {withTranslation} from 'react-i18next';
 import logo from '@assets/images/logo.png';
 import withCheckLogin from '@conts/with-check-login'
 import './index.less'
@@ -7,6 +8,12 @@ import LeftNav from "./left-nav";
 import HeaderMain from "./header-main";
 const { Header, Content, Footer, Sider } = Layout;
 
+/*
+* 1.withTranslation高阶组件，通过props传递两个参数t（translation）和i18n
+*     ---t：专门用来做国际化，t('title'):会根据当前的语言环境去找translation.json中的title
+*     ---i18n：是一个对象，身上有一个changeLanguage方法，用来切换语言的
+*/
+@withTranslation()
 //登录验证
 @withCheckLogin
 class BasicLayout extends React.Component {
@@ -36,6 +43,8 @@ class BasicLayout extends React.Component {
 
     render() {
 
+        //t专门用来做国际化，t('title'):会根据当前的语言环境去找translation.json中的title
+        const {t}=this.props;
         const {isDisplay,collapsed}=this.state;
         return (
 
@@ -43,7 +52,7 @@ class BasicLayout extends React.Component {
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
                     <div className="basic-layout-logo" >
                         <img src={logo} alt="logo"/>
-                        <h1 style={{display:isDisplay?'block':'none'}}>硅谷后台</h1>
+                        <h1 style={{display:isDisplay?'block':'none'}}>{t('title')}</h1>
                     </div>
                   <LeftNav/>
                 </Sider>

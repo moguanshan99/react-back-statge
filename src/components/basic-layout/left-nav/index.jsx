@@ -1,11 +1,12 @@
 import React from 'react';
 import {Menu,Icon} from 'antd';
 import {withRouter,Link} from 'react-router-dom'
+import {withTranslation} from "react-i18next";
 import menus from "@config/menus";
 const {SubMenu}=Menu;
 
 
-// @withCheckLogin
+@withTranslation()
 @withRouter
 //将Menu封装成一个单独的组件，是为了便于以后对导航操作，实现不同的功能，这样就不用在父组件中进行操作
 class LeftNav extends React.Component {
@@ -25,7 +26,7 @@ class LeftNav extends React.Component {
             <Menu.Item key={menu.key}>
                 <Link to={menu.key}>
                 <Icon type={menu.Icon}/>
-                <span>{menu.title}</span>
+                <span>{this.props.t(menu.title)}</span>
                 </Link>
             </Menu.Item>
             )
@@ -44,7 +45,7 @@ class LeftNav extends React.Component {
                       title={
                           <span>
                            <Icon type={menu.Icon}/>
-                            <span>{menu.title}</span>
+                            <span>{this.props.t(menu.title)}</span>
                         </span>
                       }
                   >

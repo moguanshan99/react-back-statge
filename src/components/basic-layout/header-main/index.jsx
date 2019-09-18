@@ -1,13 +1,23 @@
 import React, {Component} from "react";
 import {Button,Icon} from 'antd'
 import screenfull from 'screenfull';
+import {withTranslation,getI18n} from "react-i18next";
 import './index.less'
 
+//withTranslation高阶组件，传递两个参数：t 和 i18n
+@withTranslation()
 class HeaderMain extends Component {
 
-  //初始化状态数据(当点击按钮的时候，图标要发生变化，因此要定义数据状态)
+  /*
+  * 初始化状态数据:
+  *     --- 1.图标的状态数据：当点击按钮的时候，图标要发生变化，因此要定义初始化数据状态
+  *     --- 2.中英文切换的状态数据：当点击按钮时，按钮文字发生变化，因此要定义初始化状态数据
+  *           --但是这里的值不能写死，应该根据本地的环境来决定，i18n库提供了一个方法：getI18n().language来获取本地的语言环境
+  */
+
   state={
-    isScreenFull:false
+      isScreenFull:false,
+      isEnglish:getI18n().language==='en'
   };
 
   //点击按钮切换全屏
@@ -28,6 +38,15 @@ class HeaderMain extends Component {
     })
   };
 
+  //国际化（语言转换）点击事件
+    changeLanguage=()=>{
+         const isEnglish=!this.state.isEnglish;
+        //i18n：是一个对象，身上有一个changeLanguage方法，用来切换语言的
+      this.props.i18n.changeLanguage(isEnglish?'en':'zh-CN');
+      this.setState({
+          isEnglish
+      })
+    };
 
   /*
     * toggle:有就退出全屏，没有就全屏，
@@ -70,14 +89,15 @@ class HeaderMain extends Component {
 
 
   render() {
-    const {isScreenFull}=this.state;
-    return (
+    const {isScreenFull,isEnglish}=this.state;
+      console.log(getI18n());
+      return (
       <div className="header-main">
         <div className="header-main-top">
           <Button size="small" onClick={this.screenFull}><Icon type={isScreenFull?'fullscreen-exit':'fullscreen'} /></Button>
-          <Button className="header-main-btn" size="small">English</Button>
-          <span>欢迎,xxx</span>
-          <Button type='link' size="small">退出</Button>
+          <Button className="header-main-btn" size="small" onClick={this.changeLanguage}>{isEnglish?'中文':'English'}</Button>
+          <span>{this.props.t('header.welcome')},xxx</span>
+          <Button type='link' size="small">{this.props.t('header.exit')}</Button>
         </div>
         <div className="header-main-bottom">
            <h3>首页</h3>

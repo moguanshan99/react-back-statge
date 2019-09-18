@@ -1,5 +1,6 @@
-import React from 'react';
+import React ,{Suspense} from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+import {Spin} from 'antd';
 import routes from "./config/routes";
 import NotMatch from "@comps/not-match";
 import BasicLayout from "@comps/basic-layout";
@@ -9,20 +10,28 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <Router>
-                {/*<Switch>*/}
-                {/*    <Route path="/" exact component={Home}/>*/}
-                {/*    <Route path="/login" exact component={Login}/>*/}
-                {/*</Switch>*/}
 
-                {/*
+
+            //Suspense 用来做懒加载
+           <Suspense fallback={ <div>
+               <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} size="small" />
+               <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} />
+               <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} size="large" />
+           </div>}>
+               <Router>
+                   {/*<Switch>*/}
+                   {/*    <Route path="/" exact component={Home}/>*/}
+                   {/*    <Route path="/login" exact component={Login}/>*/}
+                   {/*</Switch>*/}
+
+                   {/*
                    Login组件被包裹在BasicLayout组件中，最为该组件的子元素在整个负组件中显示，但Login组件应该单独显示，
                    故应该从BasicLayout组件中提取出来
                 */}
-                <Switch>
-                <Route path='/login' exact component={Login}/>
+                   <Switch>
+                       <Route path='/login' exact component={Login}/>
 
-                {/*
+                       {/*
                     1.点击路由，只切换中间部分（即除了中间内容去变化，其他都不影响）
                     2.解决办法：
                         ---在App中引入BasicLayout组件，用来包裹其他组件，但是一旦用组件包裹了，子组件（即被包裹的组件）将不会在显示
@@ -31,22 +40,24 @@ export default class App extends React.Component {
                        被组件包裹的其他子元素都会被添加到children属性上
 
                  */}
-                <BasicLayout>
-                <Switch>
-                {
+                       <BasicLayout>
+                           <Switch>
+                               {
 
-                    routes.map((route,index)=>{
-                        return <Route {...route} key={index}/>
-                    })
+                                   routes.map((route,index)=>{
+                                       return <Route {...route} key={index}/>
+                                   })
 
 
-                }
-                    {/*如果不写path，匹配所有路径*/}
-                    <Route component={NotMatch}/>
-                </Switch>
-                </BasicLayout>
-                </Switch>
-            </Router>
+                               }
+                               {/*如果不写path，匹配所有路径*/}
+                               <Route component={NotMatch}/>
+                           </Switch>
+                       </BasicLayout>
+                   </Switch>
+               </Router>
+           </Suspense>
+
         );
     }
 
