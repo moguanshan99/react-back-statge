@@ -14,8 +14,8 @@ export default class App extends React.Component {
 
             //Suspense 用来做懒加载
            <Suspense fallback={ <div>
-               <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} size="small" />
-               <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} />
+               <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} size="small" />&nbsp;
+               <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} />&nbsp;&nbsp;
                <Spin style={{height:30 ,width:30,textAlign:"center",lineHeight:30}} size="large" />
            </div>}>
                <Router>

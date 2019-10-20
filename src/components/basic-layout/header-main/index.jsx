@@ -1,9 +1,15 @@
 import React, {Component} from "react";
 import {Button,Icon} from 'antd'
 import screenfull from 'screenfull';
+import {connect} from "react-redux";
 import {withTranslation,getI18n} from "react-i18next";
 import './index.less'
 
+//connect高阶组件，将redux中相关的state（只传入需要使用的状态数据）和更新state的方法通过props传递给要用的组件
+@connect(
+    (state)=>({username: state.user.user.username}),
+    null
+)
 //withTranslation高阶组件，传递两个参数：t 和 i18n
 @withTranslation()
 class HeaderMain extends Component {
@@ -90,13 +96,14 @@ class HeaderMain extends Component {
 
   render() {
     const {isScreenFull,isEnglish}=this.state;
+    const {username}=this.props;
       console.log(getI18n());
       return (
       <div className="header-main">
         <div className="header-main-top">
           <Button size="small" onClick={this.screenFull}><Icon type={isScreenFull?'fullscreen-exit':'fullscreen'} /></Button>
           <Button className="header-main-btn" size="small" onClick={this.changeLanguage}>{isEnglish?'中文':'English'}</Button>
-          <span>{this.props.t('header.welcome')},xxx</span>
+          <span>{this.props.t('header.welcome')} , {username}</span>
           <Button type='link' size="small">{this.props.t('header.exit')}</Button>
         </div>
         <div className="header-main-bottom">

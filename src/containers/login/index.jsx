@@ -147,7 +147,7 @@ import withCheckLogin from "@conts/with-check-login";
                      resLogin(username,password)
 
                     .then((result)=>{
-
+                        console.log(result);
                            //登录成功
                             message.success('登录成功');
 
@@ -168,6 +168,7 @@ import withCheckLogin from "@conts/with-check-login";
     };
 
     render() {
+
 
         // getFieldDecorator 专门表单校验的方法高阶组件
         const {getFieldDecorator}=this.props.form;
@@ -236,7 +237,7 @@ import withCheckLogin from "@conts/with-check-login";
             </div>
         );
     }
-B
+
 
 }
 export default Login;
